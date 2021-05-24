@@ -1,0 +1,152 @@
+<html>
+    <head>
+        <title>Nike inventory system</title>
+        <style>
+            body{
+                width: 90%;
+                height: 700px;
+                border: 1px solid black;
+                margin: 50px auto;
+                display: flex;
+            }
+            .cont-1{
+                 width: 25%;
+                height: 700px;
+                border: 1px solid black;
+                
+            }
+            .cont-2{
+                 width: 75%;
+                height: 700px;
+                border: 1px solid black; 
+            }
+            .cont-div{
+                display: flex;
+                flex-direction: column;
+                width: 60%;
+                height: 400px;
+                margin: 60px 40px;
+               
+            }
+            .cont-div>input{
+                height: 30px;
+                margin: 10px;
+                border: 1.6px solid black;
+                color: black;
+            }
+            .cont-div>button{
+                width: 50%;
+                margin: 10px;
+                height: 30px;
+                background-color: white;
+                color: green;
+                border: 1.6px solid black;
+                font-weight: 600;
+            }
+            .cont-2{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .cont-2>div{
+                flex-direction: column;
+                width: 20%;
+               margin-left: 40px;
+               margin-top: 40px;
+                height: 260px;
+                border: 1.6px solid black;
+            }
+            .cont-2>div>button{
+                margin-left: 10%;
+                margin-top: 5px;
+                height: 30px;
+                width: 35%;
+                border: none;
+            }
+            .cont-2>div>button:first-of-type{
+                background-color: rgb(250, 141, 141);
+            }
+            .cont-2>div>button:last-of-type{
+                background-color: lightblue;
+            }
+            .cont-2>div>p{
+                margin-left: 10%;
+                margin-top: 5px;
+                font-size: 16px;
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+            }
+             .cont-2>div>img{
+                height: 85px;
+                width: 60%;
+                margin-left: 15%;
+                margin-top: 15px;
+            }
+        </style>
+    </head>
+        <div class="cont-1">
+            <div class="cont-div">
+                <input type="text" id="name" placeholder="Name"/>
+                <input type="text" id="price" placeholder="Price"/>
+                <input type="text" id="description" placeholder="description" />
+                <input type="text" id="delivery" placeholder="Estimated delivery"/>
+                <input type="text" id="category" placeholder="category"/>
+                <input type="text" id="url" placeholder="Image url(optional)" />
+                <button onclick="addObject()">Add Product</button>
+            </div>
+
+        </div>
+        <div class="cont-2">
+        
+        </div>
+    </body>
+    <script>
+        var cont = document.querySelector('.cont-2');
+        function addObject(){
+             var name = document.getElementById('name').value;
+            var price = document.getElementById('price').value;
+            var description = document.getElementById('description').value;
+            var delivery = document.getElementById('delivery').value;
+            var category = document.getElementById('category').value;
+            var url = document.getElementById('url').value;
+
+            var div = document.createElement('div');
+            cont.appendChild(div);
+
+            var img = document.createElement('IMG');
+            img.setAttribute('src',url);
+            div.appendChild(img);
+
+            var info = { 'name':name,'Rs': price,'del':delivery, 'cat': category,'des':description };
+
+             var p = document.createElement('p');
+            for(i in info){
+                p.innerHTML +=`${info[i]}<br>`;
+            }
+             div.appendChild(p);
+
+            var btn1= document.createElement('button');
+            btn1.innerText='Remove';
+            div.appendChild(btn1);
+             var btn2 = document.createElement('button');
+              btn2.innerText = 'Update';
+              div.appendChild(btn2);
+
+             btn1.addEventListener('click',removeDiv);
+             function removeDiv(){
+                 div.remove();
+             }
+             btn2.addEventListener('click',update);
+             function update(){
+                 var new_price = prompt('Enter new price');
+                  p.innerHTML = `${name} <br> ${new_price} <br>${delivery} <br>${category}<br>${description} `
+             }
+            name.innerText="";
+            price.innerText="";
+             description.innerText = "";
+              delivery.innerText = "";
+               category.innerText = "";
+               url.innerText = "";
+
+        }
+    </script>
+</html>
